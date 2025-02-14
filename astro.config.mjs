@@ -4,14 +4,22 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 import cloudflare from '@astrojs/cloudflare';
+import tailwindcss from '@tailwindcss/vite';
+import robotsTxt from 'astro-robots-txt';
+
+import pageInsight from 'astro-page-insight';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://example.com',
-  integrations: [mdx(), sitemap()],
+  integrations: [mdx(), sitemap(), robotsTxt(), pageInsight()],
   adapter: cloudflare({
     platformProxy: {
       enabled: true
     }
   }),
+  vite: {
+    plugins: [tailwindcss()],
+  },
+
 });

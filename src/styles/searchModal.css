@@ -1,0 +1,45 @@
+.myogoo-search { 
+    input:focus {
+        outline: none;
+    }
+
+}
+
+.myogoo-modal-window {
+    display: none;
+    position: absolute;
+    z-index: -10;
+    width: 100vw;
+    height: 100vh;
+
+    top: 0;
+    left: 0;
+
+    background-color: transparent;
+
+    &[modal-show="true"] {
+        display: block;
+        position: absolute;
+        z-index: 10;
+
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+}
+
+.myogoo-modal-content {
+    width: 80%;
+    margin: auto;
+    margin-top: 10rem;
+}
+
+ol.pagefind-ui__results {
+    overflow: auto;
+    height: 420px;
+}
+
+input.pagefind-ui__search-input {
+    &:focus { 
+        outline: none;
+    }
+}

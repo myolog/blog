@@ -1,0 +1,31 @@
+---
+import SearchScript from "../components/search/SearchScript.astro";
+import { SEO } from "astro-seo";
+
+import "../styles/global.css"
+import "../styles/scrollbar.css"
+import "../styles/searchModal.css"
+
+import type { Props as SeoProps } from "astro-seo"
+import Footer from "../components/section/Footer.astro";
+import Header from "../components/section/Header.astro";
+interface BaseLayoutProps {
+    seo: SeoProps
+}
+
+
+const { seo } = Astro.props as BaseLayoutProps
+
+---
+
+<!DOCTYPE html>
+<html lang="ko">
+    <SearchScript/>
+    <head>
+        <SEO {...seo}/>
+    </head>
+    <body>
+        <slot/>
+    </body>
+    <Footer/>
+</html>

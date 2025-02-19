@@ -1,0 +1,17 @@
+---
+import { SEO } from "astro-seo";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+
+
+const { title, pubdate, heroImage, description } = Astro.props;
+
+---
+
+<BaseLayout>
+    <SEO title={title} description={description} twitter={{
+        image: heroImage,
+        imageAlt: title
+    }}/>
+    <slot/>
+</BaseLayout>

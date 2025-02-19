@@ -1,0 +1,70 @@
+---
+import Search from "astro-pagefind/components/Search";
+---
+
+<div class="myogoo-modal-window">
+	<div class="myogoo-modal-content">
+		<Search className="myogoo-search" />
+	</div>
+
+	<script>
+		const modalWindowClassName = "myogoo-modal-window";
+		const modalContentClassName = "myogoo-modal-content";
+		const modalBlurClassName = "myogoo-modal-blur";
+		document.addEventListener("keydown", (e) => {
+			//show modal
+			if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+				e.preventDefault();
+				showModal();
+			}
+			//close modal
+			if (e.key === "Escape") {
+				closeModal();
+			}
+		});
+
+		const modal_container = document.querySelector(".myogoo-modal-content");
+		const modal = document.querySelector(`.${modalWindowClassName}`);
+
+        // 이름 추천
+        const sections = ["header","main","footer"]
+		const html = document.querySelector("html");
+
+		modal?.addEventListener("click", (e) => {
+			e.preventDefault();
+			//closeModal()
+		});
+
+		modal_container?.addEventListener("click", (e) => {
+			e.stopPropagation();
+		});
+
+		function showModal() {
+			const modal = document.querySelector(`.${modalWindowClassName}`);
+			modal?.setAttribute("modal-show", "true");
+
+			const input = document.querySelector(
+				".pagefind-ui__search-input"
+			) as HTMLInputElement;
+			input?.focus();
+
+            sections.forEach((x) => {
+                const section = document.querySelector(x);
+                section?.classList.add("blur-md");
+            })
+			html?.setAttribute("style", "overflow:hidden");
+		}
+
+		function closeModal() {
+			const modal = document.querySelector(`.${modalWindowClassName}`);
+			modal?.setAttribute("modal-show", "false");
+
+
+            sections.forEach((x) => {
+                const section = document.querySelector(x);
+                section?.classList.remove("blur-md");
+            })
+			html?.setAttribute("style", "overflow:auto");
+		}
+	</script>
+</div>

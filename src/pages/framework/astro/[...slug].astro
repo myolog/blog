@@ -1,0 +1,40 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import AstroLayout from './AstroLayout.astro';
+import { render } from 'astro:content';
+import { SEO, type Props as SeoProps } from 'astro-seo';
+export async function getStaticPaths() {
+	const posts = await getCollection('framework_astro');
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: post,
+	}));
+}
+type Props = CollectionEntry<'framework_astro'>;
+
+const post = Astro.props;
+const { Content } = await render(post);
+
+const seo: SeoProps = {
+    title: post.data.title,
+    description: post.data.description,
+    twitter: {
+        image: post.data.heroImage,
+        imageAlt: post.data.title
+    }
+}
+
+---
+
+
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <SEO title="hi"/>
+    </head>
+    <main>
+        <Content/>
+    </main>
+</html>
+<!-- <AstroLayout {...seo}> -->
+<!-- </AstroLayout> -->

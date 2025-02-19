@@ -3,16 +3,19 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import SearchScript from '../components/search/SearchScript.astro';
+import { SEO } from 'astro-seo';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<!-- <BaseHead title={"흠"} description={SITE_DESCRIPTION} /> -->
+		 <SEO title='흠'/>
 	</head>
 	<body>
 		<Header />
-		<main>
+		<main class="container mx-auto">
 			<h1>🧑‍🚀 Hello, Astronaut!</h1>
 			<p>
 				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
@@ -46,5 +49,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 			</p>
 		</main>
 		<Footer />
+
 	</body>
+	<SearchScript/>
+
 </html>

@@ -4,8 +4,3 @@ description: ""
 pubDate: "Jun 01 2024"
 heroImage: ""
 ---
-
-# hi
-
-## 이게 뭐노
-아니 이게 무슨 일임?

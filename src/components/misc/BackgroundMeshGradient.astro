@@ -1,0 +1,65 @@
+---
+
+---
+
+<canvas id="mesh-gradient"></canvas>
+
+<style>
+    #mesh-gradient {
+        z-index: -100;
+        top: 0;
+        left: 0;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+
+        filter: blur(1px);
+    }
+</style>
+
+<script>
+  const canvas = document.getElementById('mesh-gradient') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d')!;
+  const width = canvas.width;
+  const height = canvas.height;
+
+  // 모서리 색상 (RGB 배열)
+  // 원하는 색상(16진수 등)으로 자유롭게 변경하세요.
+  const topLeftColor     = [173, 216, 230]; // 예: LightBlue
+  const topRightColor    = [186, 85, 211];  // 예: MediumOrchid
+  const bottomLeftColor  = [255, 250, 205]; // 예: LemonChiffon
+  const bottomRightColor = [255, 192, 203]; // 예: Pink
+
+  // 보간 함수 (숫자 2개를 t만큼 섞는다)
+  function lerp(a: number, b: number, t: number) {
+    return a + (b - a) * t;
+  }
+
+  // 색상 보간 함수 (RGB 배열을 각각 보간)
+  function lerpColor(c1: number[], c2: number[], t: number) {
+    return [
+      lerp(c1[0], c2[0], t),
+      lerp(c1[1], c2[1], t),
+      lerp(c1[2], c2[2], t)
+    ];
+  }
+
+  // 각 픽셀마다 (x, y)에 대해 4개 모서리 색상을 2차원으로 보간
+  for (let y = 0; y < height; y++) {
+    const ty = y / (height - 1);
+    for (let x = 0; x < width; x++) {
+      const tx = x / (width - 1);
+
+      // 상단 보간 (top-left ~ top-right)
+      const topColor = lerpColor(topLeftColor, topRightColor, tx);
+      // 하단 보간 (bottom-left ~ bottom-right)
+      const bottomColor = lerpColor(bottomLeftColor, bottomRightColor, tx);
+      // 위에서 구한 두 색을 y방향으로 한 번 더 보간
+      const finalColor = lerpColor(topColor, bottomColor, ty);
+
+      ctx.fillStyle = `rgb(${finalColor[0]}, ${finalColor[1]}, ${finalColor[2]})`;
+      ctx.fillRect(x, y, 1, 1);
+    }
+  }
+
+</script>

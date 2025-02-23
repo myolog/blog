@@ -1,17 +1,13 @@
 ---
 import { SEO } from "astro-seo";
+import { ClientRouter } from "astro:transitions";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 
+import "../../../styles/Blog/blog-template.css"
 
-
-const { title, pubdate, heroImage, description } = Astro.props;
-
+const { seo } = Astro.props;
 ---
 
-<BaseLayout>
-    <SEO title={title} description={description} twitter={{
-        image: heroImage,
-        imageAlt: title
-    }}/>
+<BaseLayout seo={seo} transition:name="astro-blog">
     <slot/>
 </BaseLayout>

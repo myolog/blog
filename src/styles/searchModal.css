@@ -33,6 +33,16 @@
     margin-top: 10rem;
 }
 
+.modal-blur-overlay {
+    &[blur="true"] {
+        filter: blur(10px);
+        width: 100%;
+        height: 100%;
+        position: fixed;
+
+    }
+}
+
 ol.pagefind-ui__results {
     overflow: auto;
     height: 420px;

@@ -1,7 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import AstroLayout from "./AstroLayout.astro";
+import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb.astro";
+import CardView from "../../../components/Card/CardView.astro";
+import Card from "../../../components/Card/Card.astro";
 
 
 // 목록 블러오기
@@ -11,12 +13,16 @@ posts.map((post) => ({
     props: post,
 }));
 
+const url = Astro.request.url;
 
 ---
 
 <BaseLayout seo={{title: "Framework Astro"}}>
-    <h1>Framework Astro</h1>
-    {posts.map((post) => (
-        <a href={`./astro/${post.id}`}>{post.data.title}</a><br/>
-    ))}
+    <Breadcrumb/>
+    <img src="/framework/astro/icon.svg" alt="Astro Logo" width="100"/>
+    <CardView>
+        {posts.map((post) => (
+            <Card url={`${url}/${post.id}`} title={post.data.title} description={post.data.description} heroImage={post.data.heroImage}/>
+        ))}
+    </CardView>
 </BaseLayout>

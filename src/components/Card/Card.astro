@@ -1,0 +1,14 @@
+---
+import { fade } from "astro:transitions"
+import "./card.css"
+import Image from "astro/components/Image.astro"
+import { navigate } from "astro:transitions/client"
+const { title, heroImage, tag, url, description } = Astro.props
+---
+
+<div class="card" transition:animate={fade({duration: '0.4s'})}
+    data-url={url}>
+    <img src={heroImage} alt={title} class="card-image" />
+    <h3 class="card-title">{title}</h3>
+    <p>{description}</p>
+</div>

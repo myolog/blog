@@ -1,0 +1,35 @@
+
+
+
+.blog-container {
+    max-width: var(--max-width);
+    margin: auto;
+    display: block;
+    position: relative;
+}
+
+.blog-body {
+    background-color: white;
+    border-radius: 2.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+    padding: 2rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+
+    margin: auto
+}
+
+.blog-sidebar {
+    position: sticky;
+}
+
+.blog-title {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.blog-pubdate {
+    text-align: center;
+}

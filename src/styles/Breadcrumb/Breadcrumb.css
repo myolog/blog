@@ -1,0 +1,41 @@
+
+.breadcrumb {
+    max-width: var(--max-width);
+    padding: 0;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    height: 34px;
+    list-style: none;
+    li { 
+        float: left;
+    }
+
+    a {
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    a::after {
+        display: inline-block;
+        content: '>';
+        margin-left: 1rem;
+        margin-right: 1rem;
+
+        user-select: none;
+        text-decoration: none !important;
+        color: black;
+        &:last-child {
+            content: '';
+        }
+    }
+
+    li:last-child a {
+        &::after {
+            content: none;
+        }
+    }
+
+}

@@ -1,0 +1,30 @@
+---
+import "./card.css";
+
+const { style } = Astro.props;
+---
+
+<div class="card-view" style={style}>
+	<slot />
+</div>
+
+<script transition:persist="">
+	import { navigate } from "astro:transitions/client";
+
+	function init() {
+		const cards = document.querySelectorAll(".card");
+
+		cards.forEach((card) => {
+			card.addEventListener("click", () => {
+				navigate(card.getAttribute("data-url") ?? "/");
+			});
+		});
+		document.addEventListener("astro:before-swap", () => {}, {
+			once: true,
+		});
+	}
+
+	init();
+
+	document.addEventListener("astro:after-swap", init);
+</script>

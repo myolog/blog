@@ -2,15 +2,11 @@
 title: "Astro 마크다운 한글 깨짐 #2"
 description: ""
 pubDate: "Jun 01 2024"
-heroImage: ""
+heroImage: "/blog-placeholder-1.jpg"
 ---
 
-> ㅁ
 
-s
-
-> [!TIP]
-> hi
+# 문제
 
 Astro를 통한 블로그 만들기를 작성하는 도중 한국에 인코딩 문제가 생겼다.
 이 문제를 해결하기 위해 일단 구글에 검색하기로 하였다.

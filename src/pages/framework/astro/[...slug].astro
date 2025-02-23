@@ -1,40 +1,63 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
-import AstroLayout from './AstroLayout.astro';
-import { render } from 'astro:content';
-import { SEO, type Props as SeoProps } from 'astro-seo';
+import { type CollectionEntry, getCollection } from "astro:content";
+import AstroLayout from "./AstroLayout.astro";
+import { render } from "astro:content";
+import { SEO, type Props as SeoProps } from "astro-seo";
+import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb.astro";
+import Card from "../../../components/Card/Card.astro";
+import CardView from "../../../components/Card/CardView.astro";
+
 export async function getStaticPaths() {
-	const posts = await getCollection('framework_astro');
+	const posts = await getCollection("framework_astro");
 	return posts.map((post) => ({
 		params: { slug: post.id },
 		props: post,
 	}));
 }
-type Props = CollectionEntry<'framework_astro'>;
+type Props = CollectionEntry<"framework_astro">;
 
 const post = Astro.props;
+const posts = await getCollection("framework_astro");
 const { Content } = await render(post);
 
 const seo: SeoProps = {
-    title: post.data.title,
-    description: post.data.description,
-    twitter: {
-        image: post.data.heroImage,
-        imageAlt: post.data.title
-    }
-}
+	title: post.data.title,
+	description: post.data.description,
+	twitter: {
+		image: post.data.heroImage,
+		imageAlt: post.data.title,
+	},
+};
 
+const url = Astro.request.url.split("/").slice(0, -1).join("/");
 ---
 
+<AstroLayout seo={seo}>
+	<div class="blog-container">
+		<Breadcrumb />
+		<h3 class="blog-title">{post.data.title}</h3>
+		<p class="blog-pubdate">{post.data.pubDate.toLocaleDateString()}</p>
+		<div
+			class="blog-body"
+			transition:name="astro-blog"
+			transition:animate="fade"
+		>
+			<Content />
+		</div>
 
-<html>
-    <head>
-        <meta charset="utf-8"/>
-        <SEO title="hi"/>
-    </head>
-    <main>
-        <Content/>
-    </main>
-</html>
-<!-- <AstroLayout {...seo}> -->
-<!-- </AstroLayout> -->
+		<CardView style="margin-top: 2rem">
+			{
+				posts.map((x) => {
+					return (
+						<Card
+							url={`${url}/${x.id}`}
+							title={x.data.title}
+							description={x.data.description}
+							heroImage={x.data.heroImage}
+						/>
+					);
+				})
+			}
+		</CardView>
+	</div>
+</AstroLayout>

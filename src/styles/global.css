@@ -38,10 +38,9 @@ body {
 	line-height: 1.7;
 }
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
+	max-width: var(--max-width);
 	margin: auto;
-	padding: 3em 1em;
+	margin-top: 86px;
 }
 h1,
 h2,

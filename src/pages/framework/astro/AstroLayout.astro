@@ -9,5 +9,6 @@ const { seo } = Astro.props;
 ---
 
 <BaseLayout seo={seo} transition:name="astro-blog">
+    <img class="framework-" src="/framework/astro/icon.svg" transition:persist="true">
     <slot/>
 </BaseLayout>

@@ -8,10 +8,11 @@ import robotsTxt from 'astro-robots-txt';
 
 import pageInsight from 'astro-page-insight';
 import pagefind from 'astro-pagefind';
+import icon from 'astro-icon';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://blog.myogoo.me',
-  integrations: [mdx(), sitemap(), robotsTxt(), pageInsight(),pagefind(),minify()],
+  integrations: [mdx(), sitemap(), robotsTxt(), pageInsight(), pagefind(), minify(), icon()],
   adapter: cloudflare({
     platformProxy: {
       enabled: true

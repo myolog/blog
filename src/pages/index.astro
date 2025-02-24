@@ -1,19 +1,12 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SEO } from 'astro-seo';
+import Header from '../components/section/Header.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<!doctype html>
-<html lang="ko">
-	<head>
-		<!-- <BaseHead title={"흠"} description={SITE_DESCRIPTION} /> -->
-		 <SEO title='흠'/>
-	</head>
-	<body>
-		<Header />
-		<main class="container mx-auto">
+<BaseLayout>
 			<h1>🧑‍🚀 Hello, Astronaut!</h1>
 			<p>
 				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
@@ -45,9 +38,4 @@ import { SEO } from 'astro-seo';
 					>astro-blog-template
 				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
 			</p>
-		</main>
-		<Footer />
-
-	</body>
-
-</html>
+		</BaseLayout>

@@ -25,11 +25,14 @@ const { seo } = Astro.props as BaseLayoutProps
         <SEO {...seo} charset="utf-8"/>
         <ClientRouter/>
     </head>
+    <Header/>
     <body>
-        <SearchModal/>
-        <div class="modal-blur-overlay">
-            <slot/>
-        </div>
+        <main>
+            <SearchModal/>
+            <div class="modal-blur-overlay">
+                <slot/>
+            </div>
+        </main>
     </body>
     <Footer/>
     <BackgroundMeshGradient/>

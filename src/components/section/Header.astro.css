@@ -1,0 +1,101 @@
+header {
+    width: 100%;
+    height: 76px;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+}
+
+nav {
+    margin: auto;
+    margin-top: 10px;
+    height: 66px;
+    width: var(--max-width);
+    left: 50%;
+    transform: translateX(-50%);
+    position: fixed;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+    border-radius: 1rem;
+
+    align-content: center;
+    
+    h2 {
+        margin: 0;
+        font-size: larger;
+    }
+
+    & > a {
+        font-size: medium;
+    }
+}
+
+.nav-item-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+.nav-left-items {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    
+
+    & h2 a {
+        font-size:x-large;
+        margin-right: 0.5rem;
+    }
+
+    & a {
+        font-size: medium;
+    }
+}
+
+.nav-right-items {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.nav-blur {
+    position: absolute;
+    top: 0; /* position immediately below the nav */
+    width: var(--max-width);
+    left: 50%;
+    transform: translateX(-50%);
+
+    height: 66px; /* adjust height as needed */
+    backdrop-filter: blur(1rem);
+    pointer-events: none;
+
+    z-index: -1;
+
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+}
+
+[data-icon="search"] {
+    fill: black;
+    font-size: 18px;
+}
+
+[data-icon="rocket"] {
+    fill: black;
+    font-size: 18px;
+
+}
+
+[data-icon="language"] {
+    fill: black;
+    font-size: 18px;
+}

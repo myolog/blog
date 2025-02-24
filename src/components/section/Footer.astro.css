@@ -1,0 +1,14 @@
+footer {
+    width: 100%;
+}
+
+.footer-container {
+    margin: auto;
+    max-width: var(--max-width);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid whitesmoke; /* simple, light border */
+    margin: 1rem 0;
+}

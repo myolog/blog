@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Get the absolute path to the content/framework directory
+const frameworkPath = path.join(process.cwd(), 'src/content/framework');
+
+// Read directory and get folder names
+let frameworkFolders: any[] = [];
+try {
+  frameworkFolders = fs.readdirSync(frameworkPath, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name);
+} catch (error) {
+  console.error('Error reading framework folders:', error);
+}
+
+import "../../styles/framework.css"
+---
+
+<BaseLayout>
+  <div class="container" transition:animate="fade">
+    <h1>프레임 워크</h1>
+    <hr>
+    <div class="framework-grid">
+      {frameworkFolders.map((folder) => (
+        <a href={`/framework/${folder}`} class="framework-card">
+            <img src={`/framework/${folder}/icon.svg`} alt={folder} transition:persist={folder}/>
+          <h2>{folder}</h2>
+        </a>
+      ))}
+    </div>  
+  </div>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+
+  
+
+  hr {
+    height: 3px;
+    border: none;
+    margin: 2rem 0;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(66, 133, 244, 0.75), rgba(0, 0, 0, 0));
+    position: relative;
+    overflow: visible;
+  }
+
+  hr::before {
+    content: '●';
+    color: #4285f4;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 0 1rem;
+  }
+
+</style>

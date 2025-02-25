@@ -1,14 +1,15 @@
 ---
-import { SEO } from "astro-seo";
-import { ClientRouter } from "astro:transitions";
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 
-import "../../../styles/Blog/blog-template.css"
+import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb.astro";
 
+import "../../../styles/Blog/blog-template.css"
+import "../../../styles/framework.css"
 const { seo } = Astro.props;
 ---
 
 <BaseLayout seo={seo} transition:name="astro-blog">
-    <img class="framework-" src="/framework/astro/icon.svg" transition:persist="true">
+    <img class="framework-icon" src="/framework/astro/icon.svg" transition:persist="astro">
+    <Breadcrumb/>
     <slot/>
 </BaseLayout>

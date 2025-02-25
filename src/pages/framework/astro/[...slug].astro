@@ -33,7 +33,6 @@ const url = Astro.request.url.split("/").slice(0, -1).join("/");
 ---
 
 <AstroLayout seo={seo}>
-	<Breadcrumb />
 	<h3 class="blog-title">{post.data.title}</h3>
 	<p class="blog-pubdate">{post.data.pubDate.toLocaleDateString()}</p>
 	<div class="blog-body" transition:name="astro-blog" transition:animate="fade">

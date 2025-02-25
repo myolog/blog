@@ -24,8 +24,8 @@
 <script>
   document.addEventListener("astro:page-load",() => {
 	/* ---------------------------------------
-  1) 기본 설정
---------------------------------------- */
+  	1) 기본 설정
+	--------------------------------------- */
 	const mainCanvas = document.getElementById(
 		"canvas-mesh-gradient"
 	) as HTMLCanvasElement;
@@ -59,8 +59,8 @@
 	const centerY = H / 2;
 
 	/* ---------------------------------------
-  2) 매 프레임마다 그라데이션 계산
---------------------------------------- */
+  	2) 매 프레임마다 그라데이션 계산
+	--------------------------------------- */
 	function animate() {
 		requestAnimationFrame(animate);
 

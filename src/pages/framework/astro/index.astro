@@ -4,6 +4,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb.astro";
 import CardView from "../../../components/Card/CardView.astro";
 import Card from "../../../components/Card/Card.astro";
+import AstroLayout from "./AstroLayout.astro";
 
 
 // 목록 블러오기
@@ -17,12 +18,10 @@ const url = Astro.request.url;
 
 ---
 
-<BaseLayout seo={{title: "Framework Astro"}}>
-    <Breadcrumb/>
-    <img src="/framework/astro/icon.svg" alt="Astro Logo" width="100"/>
+<AstroLayout seo={{title: "Framework Astro"}}>
     <CardView>
         {posts.map((post) => (
             <Card url={`${url}/${post.id}`} title={post.data.title} description={post.data.description} heroImage={post.data.heroImage}/>
         ))}
     </CardView>
-</BaseLayout>
+</AstroLayout>

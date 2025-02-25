@@ -5,6 +5,12 @@
 <canvas id="canvas-mesh-gradient"></canvas>
 
 <style>
+	:root {
+		--c-top-left: 173,216,230;
+		--c-top-right: 186,85,211;
+		--c-bottom-left: 255,250,205;
+		--c-bottom-right: 255,192,203;
+	}
 	#canvas-mesh-gradient {
 		z-index: -100;
 		top: 0;
@@ -12,124 +18,31 @@
 		position: fixed;
 		width: calc(100% + 100px);
 		height: calc(100% + 100px);
-
 		transform: translate(-50px, -50px);
-
 		overflow: hidden;
-
 		filter: blur(1rem);
+		/* Replace JS drawing with CSS gradients */
+		background:
+			radial-gradient(
+				circle at top left,
+				rgb(var(--c-top-left)) 0%,
+				transparent 70%
+			),
+			radial-gradient(
+				circle at top right,
+				rgb(var(--c-top-right)) 0%,
+				transparent 70%
+			),
+			radial-gradient(
+				circle at bottom left,
+				rgb(var(--c-bottom-left)) 0%,
+				transparent 70%
+			),
+			radial-gradient(
+				circle at bottom right,
+				rgb(var(--c-bottom-right)) 0%,
+				transparent 70%
+			);
+		background-blend-mode: screen;
 	}
-  </style>
-
-<script>
-  document.addEventListener("astro:page-load",() => {
-	/* ---------------------------------------
-  	1) 기본 설정
-	--------------------------------------- */
-	const mainCanvas = document.getElementById(
-		"canvas-mesh-gradient"
-	) as HTMLCanvasElement;
-	const mainCtx = mainCanvas.getContext("2d")!;
-	const W = mainCanvas.width;
-	const H = mainCanvas.height;
-
-	// 성능/화질 트레이드오프: 0.25면 가로세로 1/4 크기로 계산 (화질은 조금 떨어지지만 훨씬 빨라짐)
-	const SCALE = 0.25;
-	const smallW = Math.floor(W * SCALE);
-	const smallH = Math.floor(H * SCALE);
-
-	// 오프스크린(임시) 캔버스 준비
-	const offCanvas = document.createElement("canvas");
-	offCanvas.width = smallW;
-	offCanvas.height = smallH;
-	const offCtx = offCanvas.getContext("2d")!;
-
-	// 고정된 3개 모서리 색 (RGB)
-	const cTopLeft = [173, 216, 230]; // LightBlue
-	const cBottomLeft = [255, 250, 205]; // LemonChiffon
-	const cBottomRight = [255, 192, 203]; // Pink
-
-	// 회전하는 모서리 색
-	const cRotating = [186, 85, 211]; // MediumOrchid
-
-	// 회전 관련
-	let angle = 0;
-	const radius = 120;
-	const centerX = W / 2;
-	const centerY = H / 2;
-
-	/* ---------------------------------------
-  	2) 매 프레임마다 그라데이션 계산
-	--------------------------------------- */
-	function animate() {
-		requestAnimationFrame(animate);
-
-		// 각도 증가
-		angle += 0.02;
-
-		// 회전점 (원본 캔버스 좌표계)
-		const rotatingX = centerX + radius * Math.cos(angle);
-		const rotatingY = centerY + radius * Math.sin(angle);
-
-		// 4개 점 정보
-		const corners = [
-			{ x: 0, y: 0, color: cTopLeft },
-			{ x: rotatingX, y: rotatingY, color: cRotating },
-			{ x: 0, y: H, color: cBottomLeft },
-			{ x: W, y: H, color: cBottomRight },
-		];
-
-		// 1) 오프스크린 캔버스에 그라데이션 계산
-		//    (좌표계를 축소해서 사용하므로, 각 점 좌표도 SCALE 곱)
-		const imageData = offCtx.createImageData(smallW, smallH);
-		const data = imageData.data; // RGBA 배열
-
-		let i = 0; // data[] 인덱스
-		for (let sy = 0; sy < smallH; sy++) {
-			for (let sx = 0; sx < smallW; sx++) {
-				// 오프스크린 좌표 (sx, sy)에 대응하는 원본 좌표 (x, y)
-				const x = sx / SCALE;
-				const y = sy / SCALE;
-
-				// 역거리 보간(Inverse Distance Weighting)으로 색상 계산
-				let sumW = 0,
-					R = 0,
-					G = 0,
-					B = 0;
-				for (const c of corners) {
-					const dx = x - c.x;
-					const dy = y - c.y;
-					let dist = Math.sqrt(dx * dx + dy * dy);
-					if (dist < 0.0001) dist = 0.0001; // 0 나눗셈 방지
-					const w = 1 / dist;
-					sumW += w;
-					R += c.color[0] * w;
-					G += c.color[1] * w;
-					B += c.color[2] * w;
-				}
-				R /= sumW;
-				G /= sumW;
-				B /= sumW;
-
-				// 픽셀값 저장 (정수 변환 + 알파=255)
-				data[i++] = R;
-				data[i++] = G;
-				data[i++] = B;
-				data[i++] = 255;
-			}
-		}
-		offCtx.putImageData(imageData, 0, 0);
-
-		// 2) 오프스크린을 원본 크기로 확대하여 메인 캔버스에 그리기
-		mainCtx.clearRect(0, 0, W, H);
-		mainCtx.drawImage(offCanvas, 0, 0, W, H);
-
-	}
-
-	// 시작
-	animate();
-
-
-
-  })
-</script>
+</style>

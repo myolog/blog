@@ -33,21 +33,30 @@ const url = Astro.request.url.split("/").slice(0, -1).join("/");
 ---
 
 <AstroLayout seo={seo}>
-	<h3 class="blog-title">{post.data.title}</h3>
-	<p class="blog-pubdate">{post.data.pubDate.toLocaleDateString()}</p>
-	<div class="blog-body" transition:name="astro-blog" transition:animate="fade">
-		<Content />
+	<div class="blog-container">
+		<h3 class="blog-title">{post.data.title}</h3>
+		<p class="blog-pubdate">{post.data.pubDate.toLocaleDateString()}</p>
+		<div
+			class="blog-body"
+			transition:name="astro-blog"
+			transition:animate="fade"
+		>
+			<Content />
+		</div>
+
+		<CardView style="margin-top: 2rem">
+			{
+				posts.map((x) => {
+					return (
+						<Card
+							url={`${url}/${x.id}`}
+							title={x.data.title}
+							description={x.data.description}
+							heroImage={x.data.heroImage}
+						/>
+					);
+				})
+			}
+		</CardView>
 	</div>
-	<CardView style="margin-top: 2rem">
-		{posts.map((x) => {
-			return (
-				<Card
-					url={`${url}/${x.id}`}
-					title={x.data.title}
-					description={x.data.description}
-					heroImage={x.data.heroImage}
-				/>
-			);
-		})}
-	</CardView>
 </AstroLayout>

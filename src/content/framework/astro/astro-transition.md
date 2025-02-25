@@ -6,5 +6,13 @@ heroImage: "/blog-placeholder-2.jpg"
 
 ---
 
-ㅎㅇ 반갑다
+# Astro Transition 이란? 
+> 그런거다~ 이말이야
+
+```swift
+public class b {
+    guard let a = b else { return }
+}
+B --> C
+```
 

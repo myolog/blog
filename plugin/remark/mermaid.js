@@ -10,9 +10,7 @@ export function remarkMermaid() {
           type: "html",
           value: `
             <pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto;" tabindex="0">
-              <code>
-                  <div class="mermaid">${node.value}</div>
-              </code>
+                <div class="mermaid">${node.value}</div>
             </pre>`,
         });
       }

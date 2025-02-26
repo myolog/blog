@@ -11,7 +11,9 @@ import pagefind from 'astro-pagefind';
 import icon from 'astro-icon';
 
 import { remarkMermaid } from './plugin/remark/mermaid';
-import { remarkAscii} from "./plugin/remark/testAscii"
+import { remarkAscii } from "./plugin/remark/testAscii"
+import { remarkAstroIcon } from './plugin/remark/remarkAstroIcon';
+import rehypeRaw from 'rehype-raw';
 
 export default defineConfig({
   site: 'https://blog.myogoo.me',
@@ -25,10 +27,10 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [
       remarkMermaid,
-      remarkAscii
+      remarkAscii,
+      remarkAstroIcon
     ],
-    remarkRehype: {
-
-    }
+    remarkRehype: { allowDangerousHtml: true },  // allow raw HTML from remark
+    rehypePlugins: [ rehypeRaw ],
   }
 });

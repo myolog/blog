@@ -9,10 +9,15 @@ heroImage: "/blog-placeholder-2.jpg"
 # Astro Transition 이란? 
 > 그런거다~ 이말이야
 
-```swift
-public class b {
-    guard let a = b else { return }
-}
-B --> C
+```mermaid
+graph LR;
+    A--> B & C & D;
+    B--> A & E;
+    C--> A & E;
+    D--> A & E;
+    E--> B & C & D;
 ```
-
+::A:: ::a::
+```swift
+let a = 10 
+```

@@ -3,7 +3,8 @@ import { type CollectionEntry, getCollection } from "astro:content";
 import AstroLayout from "./AstroLayout.astro";
 import { render } from "astro:content";
 import { SEO, type Props as SeoProps } from "astro-seo";
-import Breadcrumb from "../../../components/Breadcrumb/Breadcrumb.astro";
+
+import FluentIEmoji from "../../../components/misc/FluentIEmoji.astro";
 import Card from "../../../components/Card/Card.astro";
 import CardView from "../../../components/Card/CardView.astro";
 
@@ -36,6 +37,7 @@ const url = Astro.request.url.split("/").slice(0, -1).join("/");
 	<div class="blog-container">
 		<h3 class="blog-title">{post.data.title}</h3>
 		<p class="blog-pubdate">{post.data.pubDate.toLocaleDateString()}</p>
+		<p class="blog-description">{post.data.description}</p>
 		<div
 			class="blog-body"
 			transition:name="astro-blog"
@@ -60,3 +62,14 @@ const url = Astro.request.url.split("/").slice(0, -1).join("/");
 		</CardView>
 	</div>
 </AstroLayout>
+
+<style>
+	.blog-description {
+		font-size: 1.1rem;
+		color: var(--text-secondary);
+		margin-bottom: 1.5rem;
+		font-style: italic;
+		line-height: 1.5;
+		max-width: 90%;
+	}
+</style>

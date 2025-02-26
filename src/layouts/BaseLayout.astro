@@ -1,39 +1,51 @@
 ---
-import SearchModal from "../components/search/SearchModal.astro"
+import SearchModal from "../components/search/SearchModal.astro";
 
-import "../styles/global.css"
-import "../styles/searchModal.css"
+import "../styles/global.css";
+import "../styles/searchModal.css";
 
-import type { Props as SeoProps } from "astro-seo"
+import type { Props as SeoProps } from "astro-seo";
 import Footer from "../components/section/Footer.astro";
 import Header from "../components/section/Header.astro";
 import { SEO } from "astro-seo";
 import BackgroundMeshGradient from "../components/misc/BackgroundMeshGradient.astro";
 
-import { ClientRouter } from 'astro:transitions';
-
+import { ClientRouter } from "astro:transitions";
 interface BaseLayoutProps {
-    seo: SeoProps
+  seo: SeoProps;
 }
 
-
-const { seo } = Astro.props as BaseLayoutProps
-
+const { seo } = Astro.props as BaseLayoutProps;
 ---
+
 <html lang="ko" transition:name="root" transition:animate="none">
-    <head>
-        <SEO {...seo} charset="utf-8"/>
-        <ClientRouter/>
-    </head>
-    <Header/>
-    <body>
-        <main>
-            <SearchModal/>
-            <div class="modal-blur-overlay">
-                <slot/>
-            </div>
-        </main>
-    </body>
-    <Footer/>
-    <BackgroundMeshGradient/>
+  <head>
+    <SEO {...seo} charset="utf-8" />
+    <ClientRouter />
+  </head>
+  <Header />
+  <body>
+    <main>
+      <SearchModal />
+      <div class="modal-blur-overlay">
+        <slot />
+      </div>
+    </main>
+  </body>
+  <Footer />
+  <BackgroundMeshGradient />
+
+  <script>
+    import mermaid from "mermaid"
+
+    document.addEventListener("astro:page-load", () => {
+
+        const mermaidDivs = document.querySelectorAll(".mermaid");
+        if (mermaidDivs.length > 0) {
+            mermaid.initialize({ startOnLoad: true });
+        }
+
+        console.log(mermaid)
+    })
+  </script>
 </html>

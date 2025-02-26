@@ -9,7 +9,10 @@ import robotsTxt from 'astro-robots-txt';
 import pageInsight from 'astro-page-insight';
 import pagefind from 'astro-pagefind';
 import icon from 'astro-icon';
-// https://astro.build/config
+
+import { remarkMermaid } from './plugin/remark/mermaid';
+import { remarkAscii} from "./plugin/remark/testAscii"
+
 export default defineConfig({
   site: 'https://blog.myogoo.me',
   integrations: [mdx(), sitemap(), robotsTxt(), pageInsight(), pagefind(), minify(), icon()],
@@ -18,4 +21,14 @@ export default defineConfig({
       enabled: true
     }
   }),
+
+  markdown: {
+    remarkPlugins: [
+      remarkMermaid,
+      remarkAscii
+    ],
+    remarkRehype: {
+
+    }
+  }
 });

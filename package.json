@@ -24,7 +24,8 @@
 		"astro-robots-txt": "^1.0.0",
 		"astro-seo": "^0.8.4",
 		"mermaid": "^11.4.1",
-		"unist-builder": "^4.0.0"
+		"remark-callout": "^1.1.1",
+		"remark-emoji": "^5.0.1"
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20250204.0",

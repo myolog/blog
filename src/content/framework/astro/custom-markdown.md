@@ -24,6 +24,7 @@ remark와 remarkRehype를 제공하는데 확장해서 만드는 것은 remark�
 export default defineConfig({
     /* 기존 옵션 */
     remarkPlugins: [],
+    remarkRehypePlugins: [],
     remarkRehype: {}
 })
 ```

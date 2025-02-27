@@ -1,9 +1,7 @@
 import {visit} from 'unist-util-visit'
 
-export function remarkAscii() {
-  return transformer;
-
-  function transformer(tree) {
+export default function () {
+  return (tree) => {
     visit(tree, 'text', (node, index, parent) => {
       if (typeof node.value === 'string') {
         // ::문자:: 패턴을 찾기 위한 정규식

@@ -1,9 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-
+import EmojiIcon from "../../../plugin/Icon/FluentEmojiFlatIcon"
+import { Icon } from "astro-icon/components";
 ---
 
-<BaseLayout>
-    
+<BaseLayout set:html={EmojiIcon("accordion")}>
+    <Icon name="fluent-emoji-flat:accordion" />
 </BaseLayout>

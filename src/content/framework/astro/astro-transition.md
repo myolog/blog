@@ -18,7 +18,4 @@ graph LR;
     E--> B & C & D;
 ```
 
-::A:: :accordion:
-```swift
-let a = 10 
-```
+:accordion:

@@ -12,41 +12,67 @@ import BackgroundMeshGradient from "../components/misc/BackgroundMeshGradient.as
 
 import { ClientRouter } from "astro:transitions";
 interface BaseLayoutProps {
-  seo: SeoProps;
+	seo: SeoProps;
 }
 const { seo } = Astro.props as BaseLayoutProps;
+
+import mermaid from "mermaid";
 ---
 
 <html lang="ko" transition:name="root" transition:animate="none">
-  <head>
-    <SEO {...seo} charset="utf-8" />
-    <ClientRouter />
-  </head>
-  <Header />
-  <body>
-    <main>
-      <SearchModal />
-      <div class="modal-blur-overlay">
-        <slot />
-      </div>
-    </main>
-  </body>
-  <Footer />
-  <BackgroundMeshGradient />
+	<head>
+		<SEO {...seo} charset="utf-8" />
+		<ClientRouter />
+	</head>
+	<Header />
+	<body>
+		<main>
+			<SearchModal />
+			<div class="modal-blur-overlay">
+				<slot />
+			</div>
+		</main>
+	</body>
+	<Footer />
+	<BackgroundMeshGradient />
 
-  <script>
-    import mermaid from "mermaid"
+	<script>
+		import mermaid from "mermaid";
 
-    document.addEventListener("astro:page-load", () => {
 
-        const mermaidDivs = document.querySelectorAll(".mermaid");
-        if (mermaidDivs.length > 0) {
-            mermaid.initialize({ startOnLoad: true });
-        }
+		document.addEventListener("astro:before-swap", () => {
+      console.log("before-swap");
+			mermaid.initialize({
+				theme: "dark",
+			});
+		});
+
+		document.addEventListener("astro:paeg-load", () => {
+      console.log("page-load");
+			mermaid.initialize({
+				theme: "dark",
+			});
+		});
+
+    document.addEventListener("astro:after-swap", () => {
+      console.log("after-swap");
+      mermaid.initialize({
+        theme: "dark",
+      });
+    });
+
+    document.addEventListener("astro:after-preparation", () => {
+      console.log("after-preparation");
+      mermaid.initialize({
+        theme: "dark",
+      });
+    });
+
+    document.addEventListener("astro:before-preparation", () => {
+      console.log("before-preparation");
+      mermaid.initialize({
+        theme: "dark",
+      });
     })
-
-    
-  </script>
-
-  
+	</script>
 </html>

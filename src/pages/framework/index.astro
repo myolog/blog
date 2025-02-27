@@ -16,7 +16,7 @@ try {
   console.error('Error reading framework folders:', error);
 }
 
-import "./framework.css"
+import "../../styles/framework.css"
 ---
 
 <BaseLayout>
@@ -25,7 +25,7 @@ import "./framework.css"
     <hr>
     <div class="framework-grid">
       {frameworkFolders.map((folder) => (
-        <a href={`/framework/${folder}`} class="framework-card">
+        <a href={`framework/${folder}`} class="framework-card">
             <img src={`/framework/${folder}/icon.svg`} alt={folder} class="framework-icon"/>
           <h2>{folder}</h2>
         </a>

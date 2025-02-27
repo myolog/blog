@@ -13,7 +13,7 @@ import icon from 'astro-icon';
 import remarkMermaid from './plugin/remark/mermaid';
 import remarkAscii from "./plugin/remark/testAscii"
 import remarkEmoji from "remark-emoji"
-import remarkAstroIcon from "./plugin/remark/AstroIcon"
+import remarkAstroIcon from "./plugin/remark/astroIcon"
 import remarkCallout from 'remark-callout';
 
 

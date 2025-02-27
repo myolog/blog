@@ -39,40 +39,15 @@ import mermaid from "mermaid";
 	<script>
 		import mermaid from "mermaid";
 
-
-		document.addEventListener("astro:before-swap", () => {
-      console.log("before-swap");
-			mermaid.initialize({
-				theme: "dark",
-			});
-		});
-
-		document.addEventListener("astro:paeg-load", () => {
-      console.log("page-load");
-			mermaid.initialize({
-				theme: "dark",
-			});
-		});
-
-    document.addEventListener("astro:after-swap", () => {
-      console.log("after-swap");
-      mermaid.initialize({
-        theme: "dark",
-      });
-    });
-
-    document.addEventListener("astro:after-preparation", () => {
-      console.log("after-preparation");
-      mermaid.initialize({
-        theme: "dark",
-      });
-    });
-
-    document.addEventListener("astro:before-preparation", () => {
-      console.log("before-preparation");
+    document.addEventListener("DOMContentLoaded",() => {
       mermaid.initialize({
         theme: "dark",
       });
     })
+
+    document.addEventListener("astro:after-swap", () => {
+      console.log("after-swap",mermaid);
+      mermaid.run()
+    });
 	</script>
 </html>

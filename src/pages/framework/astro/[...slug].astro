@@ -73,3 +73,10 @@ const url = Astro.request.url.split("/").slice(0, -1).join("/");
 		max-width: 90%;
 	}
 </style>
+
+<script>
+	import mermaid from "mermaid";
+	mermaid.initialize({
+		theme: "dark",
+	});
+</script>

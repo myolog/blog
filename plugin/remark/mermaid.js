@@ -1,5 +1,5 @@
 import { visit } from "unist-util-visit";
-
+import mermaid from "mermaid";
 export default function () {
   return (tree) => {
     visit(tree, "code", (node, index, parent) => {

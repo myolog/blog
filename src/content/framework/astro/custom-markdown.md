@@ -99,7 +99,7 @@ export default function () {
 이 플러그인은 마크다운 트리에서 `code` 블록을 순회하여, 언어가 `mermaid`인 경우 이를 HTML 코드로 대체한다. 이렇게 변환된 HTML은 Astro가 렌더링하면서 mermaid 다이어그램으로 표현된다.
 
 :::tip
-`unist-builer`의 `u`를 사용하면 위에서 `splice`로 직접 객체를 구성하는 과정을 더 간단하게 처리한다.
+`unist-builer`의 `u`를 사용하면 위에서 `splice`로 직접 객체를 구성하는 과정을 더 간단하게 처리가능하다.
 
 ```js
 import { u } from 'unist-builder'

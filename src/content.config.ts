@@ -6,6 +6,7 @@ const framework_astro = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
+		tags: z.array(z.string()),
 		heroImage: z.string().optional(),
 		pubDate: z.coerce.date()
 	})

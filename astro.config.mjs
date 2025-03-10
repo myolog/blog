@@ -10,12 +10,15 @@ import pageInsight from 'astro-page-insight';
 import pagefind from 'astro-pagefind';
 import icon from 'astro-icon';
 
+//remark
+
 import remarkMermaid from './plugin/remark/mermaid';
 import remarkAscii from "./plugin/remark/testAscii"
-import remarkEmoji from "remark-emoji"
 import remarkAstroIcon from "./plugin/remark/astroIcon"
-import remarkCallout from 'remark-callout';
-
+import remarkDirective from 'remark-directive';
+import remarkPrase from "remark-parse"
+import remarkCallout from "./plugin/remark/callout"
+import remarkNoSvgHeadId from "./plugin/remark/remarkNoSvgHeadId"
 
 export default defineConfig({
   site: 'https://blog.myogoo.me',
@@ -28,11 +31,16 @@ export default defineConfig({
 
   markdown: {
     remarkPlugins: [
+      remarkPrase,
+      remarkDirective,
+      remarkNoSvgHeadId,
+      remarkCallout,
       remarkMermaid,
       remarkAscii,
-      remarkCallout,
-      //remarkEmoji,
       remarkAstroIcon
     ],
+    remarkRehype: {
+      allowDangerousHtml: true,
+    }
   }
 });

@@ -5,33 +5,6 @@ import Icon from '../Icon/FluentEmojiFlatIcon';
 export default function() {
   return async (tree) => {
     visit(tree, 'text', (node, index, parent) => {
-      const parentType = parent.type;
-      const headingLevel = parentType === 'heading' ? parent.depth : 0;
-      const iconSize = "24px"
-      switch(headingLevel) {
-        case 1:
-          iconSize = "1.5rem"
-          break;
-        case 2:
-          iconSize = "1.25rem"
-          break;
-        case 3:
-          iconSize = "1rem"
-          break;
-        case 4:
-          iconSize = "0.875rem"
-          break;
-        case 5:
-          iconSize = "0.75rem"
-          break;
-        case 6:
-          iconSize = "0.625rem"
-          break;
-        default:
-          iconSize = "24px"
-          break;
-      }
-
       const ICON_SYNTAX = /:([A-Za-z0-9_-]+):/g;
       let match;
       let lastIndex = 0;
@@ -57,7 +30,6 @@ export default function() {
         });
         lastIndex = end;
       }
-      
       // 매치 후 남은 텍스트를 보존
       if (newNodes.length && lastIndex < node.value.length) {
         newNodes.push({

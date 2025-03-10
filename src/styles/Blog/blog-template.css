@@ -28,8 +28,16 @@
     margin-top: 1rem;
     margin-bottom: 1rem;
     text-align: center;
+    font-size :1.953em;
 }
 
 .blog-pubdate {
     text-align: center;
+}
+
+.blog-icon {
+    width: 1em !important;
+    height: 1em !important;
+    display: inline-block;
+    vertical-align: middle;
 }

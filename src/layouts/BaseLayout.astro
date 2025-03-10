@@ -15,8 +15,6 @@ interface BaseLayoutProps {
 	seo: SeoProps;
 }
 const { seo } = Astro.props as BaseLayoutProps;
-
-import mermaid from "mermaid";
 ---
 
 <html lang="ko" transition:name="root" transition:animate="none">
@@ -27,27 +25,27 @@ import mermaid from "mermaid";
 	<Header />
 	<body>
 		<main>
-			<SearchModal />
 			<div class="modal-blur-overlay">
 				<slot />
 			</div>
 		</main>
 	</body>
+	<SearchModal />
+
 	<Footer />
 	<BackgroundMeshGradient />
 
 	<script>
 		import mermaid from "mermaid";
+		
+		document.addEventListener("DOMContentLoaded", () => {
+			mermaid.initialize({
+				theme: "dark",
+			});
+		});
 
-    document.addEventListener("DOMContentLoaded",() => {
-      mermaid.initialize({
-        theme: "dark",
-      });
-    })
-
-    document.addEventListener("astro:after-swap", () => {
-      console.log("after-swap",mermaid);
-      mermaid.run()
-    });
+		document.addEventListener("astro:after-swap", () => {
+			mermaid.run();
+		});
 	</script>
 </html>

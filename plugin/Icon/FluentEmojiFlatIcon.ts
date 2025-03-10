@@ -1,18 +1,7 @@
 import { icons } from "@iconify-json/fluent-emoji-flat"
 import { getIconData, iconToSVG } from '@iconify/utils';
 
-
-
-
-export default function (name: string, size: number | string = 24) { 
-    var nsize: string = 24 + 'px'
-    if (typeof size === 'string') {
-        nsize = size
-    } else if (typeof size === 'number') {
-        size = Math.round(size);
-        nsize = size.toString() + 'px'
-    }
-
+export default function (name: string) { 
     const id = `fluent-emoji-flat:${name}`
 
     const iconData = getIconData(icons, name);
@@ -22,8 +11,9 @@ export default function (name: string, size: number | string = 24) {
         return `<span class="missing-icon">${name}</span>`;
     }
     const renderData = iconToSVG(iconData)
-    const props = { ...renderData.attributes, ...{ width: nsize, height: nsize } }
-    return `<svg xmlns='http://www.w3.org/2000/svg' ${Object.entries(props).map(([key, value]) => `${key}='${value}'`).join(' ')} 
+    const props = { ...renderData.attributes} // ...{ width: nsize, height: nsize } }
+    //${Object.entries(props).map(([key, value]) => `${key}='${value}'`).join(' ')} 
+    return `<svg xmlns='http://www.w3.org/2000/svg' 
             class="blog-icon" data-icon="${name}">
         <symbol id='${id}' viewBox='${props.viewBox}'>
             ${renderData.body}

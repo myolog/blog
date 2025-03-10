@@ -19,14 +19,14 @@ try {
 import "../../styles/framework.css"
 ---
 
-<BaseLayout>
+<BaseLayout seo={{title: "묘로그 - 프레임워크"}}>
   <div class="container" transition:animate="fade">
     <h1>프레임 워크</h1>
     <hr>
     <div class="framework-grid">
       {frameworkFolders.map((folder) => (
-        <a href={`framework/${folder}`} class="framework-card">
-            <img src={`/framework/${folder}/icon.svg`} alt={folder} class="framework-icon"/>
+        <a href={`/framework/${folder}`} class="framework-card">
+            <img src={`/icon/framework/${folder}/icon.svg`} alt={folder} class="framework-icon"/>
           <h2>{folder}</h2>
         </a>
       ))}

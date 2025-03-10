@@ -11,5 +11,8 @@
 		"**/Thumbs.db": true,
 		"**/.ruby-lsp": true
 	},
-	"hide-files.files": []
+	"hide-files.files": [],
+	"errorLens.excludePatterns": [
+		"**/*.{md,mdx}"
+	]
 }

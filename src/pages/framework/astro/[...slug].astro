@@ -35,7 +35,7 @@ const url = Astro.request.url.split("/").slice(0, -1).join("/");
 
 <AstroLayout seo={seo}>
 	<div class="blog-container">
-		<h3 class="blog-title">{post.data.title}</h3>
+		<h1 class="blog-title">{post.data.title}</h1>
 		<p class="blog-pubdate">{post.data.pubDate.toLocaleDateString()}</p>
 		<p class="blog-description">{post.data.description}</p>
 		<div
@@ -73,10 +73,3 @@ const url = Astro.request.url.split("/").slice(0, -1).join("/");
 		max-width: 90%;
 	}
 </style>
-
-<script>
-	import mermaid from "mermaid";
-	mermaid.initialize({
-		theme: "dark",
-	});
-</script>

@@ -3,6 +3,7 @@ title: "Astro 마크다운 한글 깨짐 #2"
 description: ""
 pubDate: "Jun 01 2024"
 heroImage: "/blog-placeholder-1.jpg"
+tags: ["astro"]
 ---
 
 
@@ -37,3 +38,4 @@ Astro를 통한 블로그 만들기를 작성하는 도중 한국에 인코딩 �
 >이게 뭔데?
 
 astro-seo는 astro에서 SEO(Search Engine Optimize) 관련하여 편한 설정을 도와주는 Tag를 제공하는 라이브러리다.
+기존 Blog Template에서 제공해주는 `BaseHead`으로 충분할 수 있지만 SEO 전용 라이브러리를 설치해 주었다.

@@ -59,7 +59,42 @@ Astro는 정적 사이트기 때문에 원하는 위치에 위 스크립드를 �
 
 //나중에 이미지 넣기
 
+## 타입에러?
+
+정상적으로 작동은 하는데 ide에서 빨간 줄이 끄였다.
+
+//이미지 넣기
+
+오류를 살펴보면 script태그에 `repo`와 `theme`이 없어서 뜨는 에러다.
+
+이는 astro와 관련 없는 `typescript`에러다 이는 아주 간단하게 오류를 해결 할 수 있다.
+d.ts 파일을 추가하면 되는데 필자는 최상위 폴더에다 `type/uttrancesScript.d.ts`파일을 만들어 주었다.
+
+`uttrancesScript.d.ts`에 다음 코드를 넣어 보자
+
+```ts 
+declare namespace astroHTML.JSX {
+    interface ScriptHTMLAttributes {
+        repo?: string,
+        theme?: "github-light" | "github-dark" | "preferred-color-scheme" | "github-dark-orange" | "icy-dark" | "dark-blue" | "photon-dark" | "boxy-light" | "gruvbox-dark"
+        'issue-term'?: string | "pathname" | "url" | "title" | "og:title"
+        'issue-number'?: string
+    }
+}
+```
+
+이는 간단하게 타입을 추가해주는 코드이다.
+astro에서 script는 다음 큰 두가지 타입을 가진다.
+- `ScriptHTMLAttributes`
+- `AstroScriptAttributes`
+
+사실 이 둘중 아무거나 선택해서 타입을 확장해도 되지만 `uttrances`는 astro와 관련이 없으니 `ScriptHTMLAttributes`를 확장하여 타입을 추가하였다.
+
+위 코드를 추가하고 다시 ide를 확인해 보면 theme관련해서 자동완성까지 지원하는걸 볼 수 있다.
+
+// 자동완성 이미지 추가
+
 ## 결론
 
-Uttrances를 통해 간단하고 익숙한 블로그 댓글창을 구현할 수 있었다.
-Issue가 몇만개 쌓이면 어떻게 될지 살짝 궁금해 진다.
+Uttrances를 통해 간단하고 익숙한 블로그 댓글창을 손쉽게 구현할 수 있었다.  
+계속해서 블로그를 만들어 나가보자

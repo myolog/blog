@@ -7,6 +7,7 @@ import { SEO, type Props as SeoProps } from "astro-seo";
 import FluentIEmoji from "../../../components/misc/FluentEmoji.astro";
 import Card from "../../../components/Card/Card.astro";
 import CardView from "../../../components/Card/CardView.astro";
+import SideHeader from "../../../components/SideHeader.astro";
 
 export async function getStaticPaths() {
 	const posts = await getCollection("framework_astro");
@@ -34,6 +35,7 @@ const url = Astro.request.url.split("/").slice(0, -1).join("/");
 ---
 
 <AstroLayout seo={seo}>
+	<SideHeader/>
 	<div class="blog-container">
 		<h1 class="blog-title">{post.data.title}</h1>
 		<p class="blog-pubdate">{post.data.pubDate.toLocaleDateString()}</p>
@@ -52,7 +54,7 @@ const url = Astro.request.url.split("/").slice(0, -1).join("/");
 			theme="github-light"
 			crossorigin="anonymous"
 			async>
-		s</script>
+		</script>
 
 		<CardView style="margin-top: 2rem">
 			{

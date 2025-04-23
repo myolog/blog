@@ -13,12 +13,10 @@ import icon from 'astro-icon';
 //remark
 
 import remarkMermaid from './plugin/remark/mermaid';
-import remarkAscii from "./plugin/remark/testAscii"
-import remarkAstroIcon from "./plugin/remark/astroIcon"
+import remarkCallout from "./plugin/remark/callout"
 import remarkDirective from 'remark-directive';
 import remarkPrase from "remark-parse"
-import remarkCallout from "./plugin/remark/callout"
-import remarkNoSvgHeadId from "./plugin/remark/remarkNoSvgHeadId"
+import remarkEmoji from "remark-emoji"
 
 export default defineConfig({
   site: 'https://blog.myogoo.me',
@@ -33,11 +31,9 @@ export default defineConfig({
     remarkPlugins: [
       remarkPrase,
       remarkDirective,
-      remarkNoSvgHeadId,
       remarkCallout,
       remarkMermaid,
-      remarkAscii,
-      remarkAstroIcon
+      remarkEmoji
     ],
     remarkRehype: {
       allowDangerousHtml: true,

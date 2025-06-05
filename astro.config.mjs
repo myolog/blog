@@ -11,12 +11,14 @@ import pagefind from 'astro-pagefind';
 import icon from 'astro-icon';
 
 //remark
-
 import remarkMermaid from './plugin/remark/mermaid';
 import remarkCallout from "./plugin/remark/callout"
 import remarkDirective from 'remark-directive';
 import remarkPrase from "remark-parse"
 import remarkEmoji from "remark-emoji"
+
+//rehype
+import rehypeMermaid from 'rehype-mermaid';
 
 export default defineConfig({
   site: 'https://blog.myogoo.me',
@@ -40,6 +42,9 @@ export default defineConfig({
     },
     syntaxHighlight: {
       excludeLangs: ['mermaid', 'math'],
-    }
+    },
+    rehypePlugins: [
+      [rehypeMermaid, { strategy: 'img-svg' }]
+    ]
   }
 });

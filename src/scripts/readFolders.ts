@@ -16,10 +16,6 @@ try {
     console.error("Error reading framework folders:", error);
 }
 
-enum folders {
-    
-}
-
 const folderDataSchema = z.object({
     folders: z.array(z.string())
 });

@@ -1,17 +1,8 @@
-import { glob } from 'astro/loaders';
-import { defineCollection, z } from 'astro:content';
+import ContentConfigUtils from './scripts/utils/contentConfigUtils';
+import { z } from 'astro:content';
 
-const framework_astro = defineCollection({
-	loader: glob({ base: "./src/content/framework/astro", pattern: "**/*.{md,mdx}" }),
-	schema: z.object({
-		title: z.string(),
-		description: z.string(),
-		tags: z.array(z.string()),
-		heroImage: z.string().optional(),
-		pubDate: z.coerce.date()
-	})
-})
+var collection = ContentConfigUtils.Instance
+collection.addZodObject('_framework_minecraft',z.object({ version: z.string() }))
+collection.getCollections()
 
-
-
-export const collections = { framework_astro };
+export const collections = collection.getCollections();

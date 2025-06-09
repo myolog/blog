@@ -6,7 +6,7 @@ import AstroLayout from "./AstroLayout.astro";
 
 
 // 목록 블러오기
-const posts = await getCollection('framework_astro');
+const posts = await getCollection('_framework_astro');
 posts.map((post) => ({
     params: { slug: post.id },
     props: post,

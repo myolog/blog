@@ -129,6 +129,7 @@ function getCollectionNames(rootPath: string, relPath: string): string[] {
   
     return [...me, ...children];
 }
+
 ```
 
 위 코드는 폴더를 탐색하고 md 파일 있을 경우 rootPath를 제외한 경로를 추출해서 리스트로 반환한다. 이를 응용하여 defineCollection을 다음과 같이 바꿀 수 있다.

@@ -1,50 +1,42 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import fs from 'node:fs';
-import path from 'node:path';
+import { RootLayout } from "@myolog/layouts";
+import { Collections } from "@myolog/markdown";
+import { FrameworkCard, CardView } from "@myolog/components/card";
 
-// Get the absolute path to the content/framework directory
-const frameworkPath = path.join(process.cwd(), 'src/content/framework');
-
-// Read directory and get folder names
-let frameworkFolders: any[] = [];
-try {
-  frameworkFolders = fs.readdirSync(frameworkPath, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => dirent.name);
-} catch (error) {
-  console.error('Error reading framework folders:', error);
-}
-
-import "../../styles/framework.css"
+import { Breadcrumb } from "@myolog/components/breadcrumb";
 ---
 
-<BaseLayout seo={{title: "묘로그 - 프레임워크"}}>
-  <div class="container" transition:animate="fade">
-    <h1>프레임 워크</h1>
-    <hr>
-    <div class="framework-grid">
-      {frameworkFolders.map((folder) => (
-        <a href={`/framework/${folder}`} class="framework-card">
-            <img src={`/icon/framework/${folder}/icon.svg`} alt={folder} class="framework-icon"/>
-          <h2>{folder}</h2>
-        </a>
-      ))}
-    </div>  
-  </div>
-</BaseLayout>
+<RootLayout seo={{ title: "묘로그 - 프레임워크" }}>
+	<Breadcrumb containLastUrl />
+	<div class="container">
+		<h1>프레임 워크</h1>
+		<hr />
+		<CardView>
+			{
+				Collections.values
+					.filter((v) => v.category() === "framework")
+					.map((value) => (
+						<FrameworkCard
+							href={`/${value.name}`}
+							blogName={value.name}
+              tags={value.tags()}
+						/>
+					))
+			}
+		</CardView>
+	</div>
+</RootLayout>
 
 <style>
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-  }
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 2rem 1rem;
+	}
 
-  h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-  }
-  
+	h1 {
+		font-size: 2rem;
+		font-weight: bold;
+		margin-bottom: 1.5rem;
+	}
 </style>

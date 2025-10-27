@@ -2,6 +2,7 @@
 	"name": "myolog",
 	"type": "module",
 	"version": "0.0.1",
+	"author": "N_Joy_Shadow",
 	"scripts": {
 		"dev": "astro dev",
 		"build": "astro build",
@@ -17,11 +18,15 @@
 		"@astrojs/rss": "^4.0.11",
 		"@astrojs/sitemap": "^3.2.1",
 		"@microflash/remark-callout-directives": "^4.3.3",
+		"@myolog/components": "file:../components",
+		"@myolog/layouts": "file:../layouts",
+		"@myolog/libs": "file:../libs",
+		"@myolog/markdown": "file:../markdown",
 		"astro": "^5.5.0",
 		"astro-icon": "^1.1.5",
 		"astro-minify-html-swc": "^0.1.5",
 		"astro-page-insight": "^0.10.1",
-		"astro-pagefind": "^1.8.0",
+		"astro-pagefind": "^1.8.5",
 		"astro-robots-txt": "^1.0.0",
 		"astro-seo": "^0.8.4",
 		"mermaid": "^11.4.1",
@@ -33,8 +38,8 @@
 	},
 	"devDependencies": {
 		"@cloudflare/workers-types": "^4.20250204.0",
-		"@iconify-json/fluent": "^1.2.14",
-		"@iconify-json/fluent-emoji-flat": "^1.2.3",
+		"@iconify-json/skill-icons": "^1.2.3",
+
 		"wrangler": "^3.109.0"
 	}
 }

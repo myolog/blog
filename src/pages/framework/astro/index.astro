@@ -1,13 +1,14 @@
 ---
-import { getCollection } from "astro:content";
-import CardView from "../../../components/Card/CardView.astro";
-import Card from "../../../components/Card/Card.astro";
-import AstroLayout from "./AstroLayout.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+import { Card, CardView } from "@myolog/components/card";
+import {AstroPageLayout} from "@myolog/layouts/content";
 
+type Props = CollectionEntry<'framework/astro'>;
 
 // 목록 블러오기
-const posts = await getCollection('_framework_astro');
-posts.map((post) => ({
+const posts = await getCollection('framework/astro');
+
+posts.map((post: Props) => ({
     params: { slug: post.id },
     props: post,
 }));
@@ -16,10 +17,10 @@ const url = Astro.request.url;
 
 ---
 
-<AstroLayout seo={{title: "Framework Astro"}}>
+<AstroPageLayout seo={{title: "묘로그 - Astro"}}>
     <CardView>
-        {posts.map((post) => (
+        {posts.map((post: Props) => (
             <Card url={`${url}/${post.id}`} title={post.data.title} description={post.data.description} heroImage={post.data.heroImage}/>
         ))}
     </CardView>
-</AstroLayout>
+</AstroPageLayout>

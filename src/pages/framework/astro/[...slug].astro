@@ -1,23 +1,21 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import AstroLayout from "./AstroLayout.astro";
 import { render } from "astro:content";
 import { type Props as SeoProps } from "astro-seo";
 
-import Card from "../../../components/Card/Card.astro";
-import CardView from "../../../components/Card/CardView.astro";
-import SideHeader from "../../../components/SideHeader.astro";
+import {Card, CardView } from "@myolog/components/card";
+import {AstroPageLayout} from "@myolog/layouts/content";
 
-const posts = await getCollection('_framework_astro')
+const posts = await getCollection('framework/astro')
 
 export async function getStaticPaths() {
-	const posts = await getCollection('_framework_astro');
-	return posts.map((post) => ({
+	const posts = await getCollection('framework/astro');
+	return posts.map((post: any) => ({
 		params: { slug: post.id },
 		props: post,
 	}));
 }
-type Props = CollectionEntry<'_framework_astro'>;
+type Props = CollectionEntry<'framework/astro'>;
 
 const post = Astro.props;
 const { Content } = await render(post);
@@ -34,8 +32,7 @@ const seo: SeoProps = {
 const url = Astro.request.url.split("/").slice(0, -1).join("/");
 ---
 
-<AstroLayout seo={seo}>
-	<SideHeader/>
+<AstroPageLayout seo={seo}>
 	<div class="blog-container">
 		<h1 class="blog-title">{post.data.title}</h1>
 		<p class="blog-pubdate">{post.data.pubDate.toLocaleDateString()}</p>
@@ -58,7 +55,7 @@ const url = Astro.request.url.split("/").slice(0, -1).join("/");
 
 		<CardView style="margin-top: 2rem">
 			{
-				posts.map((x) => {
+				posts.map((x: Props) => {
 					return (
 						<Card
 							url={`${url}/${x.id}`}
@@ -71,7 +68,7 @@ const url = Astro.request.url.split("/").slice(0, -1).join("/");
 			}
 		</CardView>
 	</div>
-</AstroLayout>
+</AstroPageLayout>
 
 <style>
 	.blog-description {

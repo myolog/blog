@@ -1,0 +1,20 @@
+---
+import { getCollection } from "astro:content";
+
+import { Card, CardView } from "@myolog/components/card"
+import {AstroPageLayout} from "@myolog/layouts/content";
+
+const posts = await getCollection('framework/minecraft');
+posts.map((post) => ({
+    params: { slug: post.id },
+    props: post,
+}));
+
+---
+
+<AstroPageLayout>
+    <CardView>
+        {posts.map(x => (<Card url={`./minecraft/${x.id}`} {...x.data} />))}
+    </CardView>
+
+</AstroPageLayout>

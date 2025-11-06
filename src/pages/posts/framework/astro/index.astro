@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import { Card, CardView } from "@myolog/components/card";
+import { Post } from "@myolog/components/post"
 import {AstroPageLayout} from "@myolog/layouts/content";
 
 type Props = CollectionEntry<'framework/astro'>;
@@ -20,7 +21,7 @@ const url = Astro.request.url;
 <AstroPageLayout seo={{title: "묘로그 - Astro"}}>
     <CardView>
         {posts.map((post: Props) => (
-            <Card url={`${url}/${post.id}`} title={post.data.title} description={post.data.description} heroImage={post.data.heroImage}/>
+            <Post href={`${url}/${post.id}`} title={post.data.title} excerpt={post.data.description} imageUrl={post.data.heroImage}/>
         ))}
     </CardView>
 </AstroPageLayout>

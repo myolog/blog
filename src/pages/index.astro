@@ -1,8 +1,34 @@
 ---
-import {RootLayout} from "@myolog/layouts";
-
-
+import { RootLayout, Main } from "@myolog/layouts";
+import { SideSection, HeroSection } from "@myolog/layouts/section";
+import { getCollection } from "astro:content";
+import { Post } from "@myolog/components/post";
+const collections = await getCollection("categories/framework/astro");
 ---
 
-<RootLayout seo={{ title: "묘로그"}}>
-</RootLayout>
+<Main seo={{ title: "묘로그" }}>
+	<HeroSection
+		title="Welcome to Myolog"
+		subtitle={"Discover articles, tutorials, and insights about modern web development, programming languages, and software engineering best practices."}
+	/>
+	<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+		<div class="lg:col-span-2">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				{
+					collections.map((x: any, i: number) => (
+						<Post
+							featured={i === 0}
+							title={x.data.title}
+							excerpt={x.data.description}
+							imageUrl={x.data.heroImage}
+							category="Typescript"
+							readTime="10 min"
+							date={new Date().toDateString()}
+						/>
+					))
+				}
+			</div>
+		</div>
+		<SideSection />
+	</div>
+</Main>

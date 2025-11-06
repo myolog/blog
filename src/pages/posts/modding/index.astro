@@ -1,0 +1,14 @@
+﻿---
+import { Breadcrumb } from "@myolog/components/breadcrumb";
+import {RootLayout} from "@myolog/layouts";
+import { MyoUrl } from "@myolog/libs";
+import { Collections } from "@myolog/markdown";
+
+const url = MyoUrl.of(Astro.request.url)
+---
+
+<RootLayout seo={{ title: "묘로그 -  모딩"}}>
+    <Breadcrumb/>
+    {Collections.values.filter((x) => x.category() === 'modding')
+.map(content => <div>{content.content()}</div>)}
+</RootLayout>

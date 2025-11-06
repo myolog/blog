@@ -1,0 +1,26 @@
+---
+import { RootLayout } from "@myolog/layouts";
+import { Categories } from "@myolog/markdown";
+(await getCollection("framework/astro", () => {}))
+import { MyoUrl } from "@myolog/libs";
+import { getCollection } from "astro:content";
+
+const url =  MyoUrl.of(Astro.request.url)
+
+---
+
+<RootLayout seo={{ title: "묘로그 - 게시물" }}>
+	<div class="container flex flex-col gap-2">
+		{
+			[...Categories.instance.categories()].map((category) => (
+				<a class="gap-2 p-2 text-2xl glass" href={`${url}/${category}`}>
+					<h1>{category}</h1>
+					<hr />
+					<div class="flex flex-row gap-1">
+
+					</div>
+				</a>
+			))
+		}
+	</div>
+</RootLayout>

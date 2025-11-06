@@ -53,20 +53,21 @@ const url = Astro.request.url.split("/").slice(0, -1).join("/");
 			async>
 		</script>
 
-		<CardView style="margin-top: 2rem">
 			{
 				posts.map((x: Props) => {
 					return (
 						<Card
-							url={`${url}/${x.id}`}
+							href={`${url}/${x.id}`}
 							title={x.data.title}
-							description={x.data.description}
-							heroImage={x.data.heroImage}
+							excerpt={x.data.description}
+							imageUrl={x.data.heroImage}
+							category="a"
+							readTime="2"
+							date=""
 						/>
 					);
 				})
 			}
-		</CardView>
 	</div>
 </AstroPageLayout>
 

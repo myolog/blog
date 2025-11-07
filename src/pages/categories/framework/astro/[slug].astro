@@ -1,7 +1,8 @@
 ---
 import { Main } from "@myolog/layouts";
+import { MyoSEO } from "@myolog/libs/blog"
+import { type BlogProps } from "@myolog/markdown"; 
 import { type CollectionEntry, getCollection, render } from "astro:content";
-
 
 export const getStaticPaths = (async () => {
     const posts = await getCollection("categories/framework/astro")
@@ -13,9 +14,10 @@ export const getStaticPaths = (async () => {
 
 const post = Astro.props
 const { Content } = await render(post);
+const seo = MyoSEO.BlogSEO(post.data as BlogProps)
 ---
 
-<Main seo={{}}>
+<Main seo={seo}>
     <Content/>
 </Main>
 

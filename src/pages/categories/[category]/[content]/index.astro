@@ -1,0 +1,27 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+
+import { Breadcrumb } from "@myolog/components/breadcrumb";
+import { Main } from "@myolog/layouts";
+import { MyoSEO, MyoStaticPaths } from "@myolog/libs/blog";
+import { Categories } from "@myolog/markdown";
+import { MyoUrl } from "@myolog/libs";
+import { Post, PostView } from "@myolog/components/post";
+
+
+export function getStaticPaths() {
+    return MyoStaticPaths.getStaticPaths()
+}
+
+const { content } = Astro.params
+const pathname = MyoUrl.of(Astro.request.url).pathname.replace("/","")
+const posts = await getCollection(pathname)
+---
+
+<Main seo={{title: `묘로그 - ${content}`}}>
+    <Breadcrumb/>
+    <PostView>
+        {posts.map((x) => <Post {...x.data}/>)}
+    </PostView>
+</Main>

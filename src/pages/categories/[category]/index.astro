@@ -1,53 +1,53 @@
 ---
 import { Breadcrumb } from '@myolog/components/breadcrumb';
-import { Category, CategoryHeader } from '@myolog/components/category';
+import { CategoryHeader } from '@myolog/components/category';
 import { Main } from '@myolog/layouts';
-import { MyoUrl } from '@myolog/libs';
-import { Categories, type CategoryType } from '@myolog/markdown';
+import { MyoCollection, MyoStaticPaths } from "@myolog/libs/astro"
+import { Badge } from '@myolog/components/common';
+import { getCollection } from 'astro:content';
+import { render } from 'astro:content';
+import { Post, PostView } from '@myolog/components/post';
+import type { CollectionKey } from 'astro:content';
 import { Icon } from 'astro-icon/components';
-import { Toggle } from "@myolog/components/common"
-import { MyoCollection, MyoStaticPaths } from "@myolog/libs/blog"
-import { Collections } from "@myolog/markdown"
-import { PostView, Post } from '@myolog/components/post';
+
 export function getStaticPaths() {
-    return MyoStaticPaths.getStaticPaths()
-    return [
-        { params: { category: "framework" },
-            props: { ...Categories.instance.categoryData["framework"] }},
-        { params: { category: "modding" },
-            props: { ...Categories.instance.categoryData["modding"] }}
-    ]
+    return MyoStaticPaths.categoryStaticPath()
 }
 
 
 const { category } = Astro.params
 const { description, icon, childs, articleCount } = Astro.props
-const url = MyoUrl.of(Astro.request.url)
-const subCategories = ["all", ...childs]
+
+const contents = MyoCollection.categories[category].contents
+
+type Post = Awaited<ReturnType<typeof getCollection>>[number]
+
+const postsByContent: Record<string, Post[]> = {}
 
 
-const collection = new MyoCollection(category as CategoryType)
-const posts = await collection.getCollections()
+await Promise.all(
+  contents.map(async (contentName) => {
+    const allPosts = await getCollection(`categories/${category}/${contentName}` as CollectionKey)
+    postsByContent[contentName] = allPosts.sort((a,b) => b.data.publishTime - a.data.publishTime).slice(0,3)
+  })
+)
 
 ---
 
 <Main seo={{ title: `묘로그 - ${category}`}}>
     <Breadcrumb/>
     <CategoryHeader title={category} description={description!} icon={icon!} articleLength={articleCount} />
-    <div class="flex gap-3 items-center flex-row mb-6" id="subcategory-group">
-        <Icon name='lucide:tag'/>
-        {subCategories.map(x => <Toggle aria-label={x}>{x}</Toggle>)}
-    </div>
-
-    <PostView>
-        {posts.map(x => <Post href={`../${x.collection}/${x.id}`} {...x.data} imageUrl={x.data.heroImage} date={x.data.pubDate.toISOString()}/>)}
-    </PostView>
-
+    {Object.keys(postsByContent).map(x => <div>
+        <div class="flex gap-2 flex-row items-center mb-4">
+            <Badge title={x} size="small"/>
+            <hr class="flex-1">
+            <a href={`/categories/${category}/${x}`} class="flex gap-2 flex-row">
+              See more
+              <Icon name="lucide:arrow-right" class="self-center"/>
+            </a>
+        </div>
+        <PostView>
+            {postsByContent[x].map(p => <Post {...p.data} href={`/categories/${category}/${x}/${p.id}`} category={p.data.tags[0]}/>)}
+        </PostView>
+    </div>)}
 </Main>
-
-<script>
-    const group = document.querySelector("#subcategory-group")!
-    
-    group.querySelectorAll("button")
-
-</script>

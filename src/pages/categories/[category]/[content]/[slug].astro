@@ -1,28 +1,27 @@
 ---
-import { getCollection } from "astro:content"
+import { render } from "astro:content"
 import { Main } from '@myolog/layouts';
-import { MyoCollection, MyoSEO } from '@myolog/libs/blog';
+import { MyoSEO } from '@myolog/libs/astro';
+import { PostDetail } from "@myolog/components/post"
 import { Breadcrumb } from "@myolog/components/breadcrumb";
-import { MyoStaticPaths } from "@myolog/libs/blog";
+import { MyoStaticPaths } from "@myolog/libs/astro";
 
 export async function getStaticPaths() {
-	MyoStaticPaths.getStaticPaths(2,{} ,(v) => {
-		
-		return 
-	})
-	const posts = await getCollection(`categories/${category}/${content}`);
-	return posts.map((post: Props) => ({
-		params: {  slug: post.id },
-		props: post,
-	}));
+	return await MyoStaticPaths.slugStaticPath()
 }
 
 
 
-const { title } = Astro.props
+const { title, heroImage } = Astro.props.data
+
+const { Content } = await render(Astro.props);
+
 
 ---
 
-<Main seo={MyoSEO.BlogSEO(Astro.props)}>
+<Main seo={MyoSEO.BlogSEO(Astro.props.data)}>
 	<Breadcrumb title={title}/>
+	<PostDetail {...Astro.props.data} category={Astro.props.data.tags[0]}>
+		<Content/>
+	</PostDetail> 
 </Main>

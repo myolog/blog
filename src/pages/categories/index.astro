@@ -4,8 +4,9 @@ import { HeroSection } from "@myolog/layouts/section";
 import { Breadcrumb } from "@myolog/components/breadcrumb";
 import { PostView } from "@myolog/components/post";
 import { Category } from "@myolog/components/category";
-import { Categories } from "@myolog/markdown";
-const categories = Categories.instance.categories();
+import { MyoCollection } from "@myolog/libs/astro";
+
+import { CategoryData } from "@myolog/markdown/data"
 ---
 
 <Main seo={{ title: "묘로그 - 카테고리" }}>
@@ -14,7 +15,11 @@ const categories = Categories.instance.categories();
 		title="Article Categories"
 		subtitle="다양한 카테고리의 기술 아티클을 탐색하세요. 프레임워크부터 알고리즘까지, 개발에 필요한 모든 지식을 찾아보세요."
 	/>
-	<PostView>
-		{categories.map((category) => <Category {...category} />)}
-	</PostView>
+    <PostView>
+        {Object.keys(MyoCollection.categories).map(c => {
+            return (
+                <Category {...CategoryData[c]}/>
+        )
+    })}
+    </PostView>
 </Main>

@@ -40,7 +40,7 @@ export default defineConfig({
     vite: {
         plugins: [tailwindcss()],
         ssr: {
-            noExternal: ["@myolog/components", "@myolog/layouts"],
+            noExternal: ["@myolog/components", "@myolog/layouts", "@myolog/libs"],
         },
         server: {
             fs: {

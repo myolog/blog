@@ -1,27 +1,27 @@
 ---
-import type { GetStaticPaths } from "astro";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionKey } from "astro:content";
 
 import { Breadcrumb } from "@myolog/components/breadcrumb";
 import { Main } from "@myolog/layouts";
-import { MyoSEO, MyoStaticPaths } from "@myolog/libs/blog";
-import { Categories } from "@myolog/markdown";
+import { MyoSEO, MyoStaticPaths } from "@myolog/libs/astro";
 import { MyoUrl } from "@myolog/libs";
 import { Post, PostView } from "@myolog/components/post";
-
+import { Badge } from "@myolog/components/common";
 
 export function getStaticPaths() {
-    return MyoStaticPaths.getStaticPaths()
+    return MyoStaticPaths.contentStaticPath()
 }
 
-const { content } = Astro.params
-const pathname = MyoUrl.of(Astro.request.url).pathname.replace("/","")
-const posts = await getCollection(pathname)
+const { category, content } = Astro.params
+const posts = await getCollection(`categories/${category}/${content}` as CollectionKey)
 ---
 
 <Main seo={{title: `묘로그 - ${content}`}}>
     <Breadcrumb/>
+    <div class="my-4">
+        <Badge title="Astro"/>
+    </div>
     <PostView>
-        {posts.map((x) => <Post {...x.data}/>)}
+        {posts.map((x) => <Post {...x.data} href={`/categories/${category}/${content}/${x.id}`} category={x.data.tags[0]}/>)}
     </PostView>
 </Main>

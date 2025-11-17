@@ -1,9 +1,12 @@
 ---
 import { RootLayout, Main } from "@myolog/layouts";
 import { SideSection, HeroSection } from "@myolog/layouts/section";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionKey } from "astro:content";
 import { Post } from "@myolog/components/post";
-const collections = await getCollection("categories/framework/astro");
+import { Collections } from "@myolog/markdown";
+
+const collectionKey = "categories/framework/astro" as CollectionKey
+const collections = await getCollection(collectionKey);
 ---
 
 <Main seo={{ title: "묘로그" }}>
@@ -19,11 +22,11 @@ const collections = await getCollection("categories/framework/astro");
 						<Post
 							featured={i === 0}
 							title={x.data.title}
-							excerpt={x.data.description}
-							imageUrl={x.data.heroImage}
-							category="Typescript"
-							readTime="10 min"
-							date={new Date().toDateString()}
+							description={x.data.description}
+							heroImage={x.data.heroImage}
+							category={x.data.tags[0]}
+							publishTime={x.data.publishTime}
+							href={`/${collectionKey}/${x.id}`}
 						/>
 					))
 				}

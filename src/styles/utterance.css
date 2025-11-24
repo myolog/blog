@@ -1,0 +1,276 @@
+/* Utterances Custom Theme - Dark Mode (Fluent Design) */
+
+/* Main Timeline Container */
+.timeline {
+  max-width: 100%;
+  font-family: inherit !important;
+}
+
+/* Header - "0 Comments - powered by utteranc.es" */
+.timeline-header {
+  margin-bottom: 1.5rem !important;
+  padding-bottom: 1rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  font-size: 0.875rem !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-weight: normal !important;
+}
+
+.timeline-header a.text-link {
+  color: #fff !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+}
+
+.timeline-header a.text-link:hover {
+  text-decoration: underline !important;
+}
+
+.timeline-header em {
+  font-style: normal !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.timeline-header em a.text-link {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-weight: normal !important;
+}
+
+/* Comment Card */
+.timeline-comment {
+  display: flex !important;
+  gap: 1rem !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 1rem !important;
+  padding: 1.25rem !important;
+  margin-bottom: 1rem !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Avatar */
+.timeline-comment .avatar {
+  flex-shrink: 0 !important;
+}
+
+.timeline-comment .avatar img {
+  border-radius: 0.75rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  width: 44px !important;
+  height: 44px !important;
+}
+
+/* Comment Form */
+.comment {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+}
+
+/* Tab Navigation Header */
+.new-comment-header {
+  background: transparent !important;
+  border: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.tabnav-tabs {
+  display: flex !important;
+  gap: 0.5rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding-bottom: 0.5rem !important;
+}
+
+.tabnav-tab {
+  background: transparent !important;
+  border: none !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.5rem !important;
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 0.875rem !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  font-weight: 500 !important;
+}
+
+.tabnav-tab:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #fff !important;
+}
+
+.tabnav-tab[aria-selected="true"] {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #fff !important;
+}
+
+/* Comment Body */
+.comment-body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.form-control {
+  width: 100% !important;
+  min-height: 100px !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 0.75rem !important;
+  color: #fff !important;
+  padding: 0.75rem !important;
+  font-family: inherit !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+  resize: vertical !important;
+  transition: all 0.2s ease !important;
+}
+
+.form-control:focus {
+  background: rgba(0, 0, 0, 0.4) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05) !important;
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.form-control:disabled {
+  background: rgba(255, 255, 255, 0.05) !important;
+  cursor: not-allowed !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Markdown Preview */
+.markdown-body {
+  min-height: 100px !important;
+  padding: 0.75rem !important;
+  color: #fff !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+}
+
+.markdown-body p {
+  margin: 0.5rem 0 !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.markdown-body code {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #fff !important;
+  padding: 0.125rem 0.375rem !important;
+  border-radius: 0.375rem !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  font-size: 0.8125rem !important;
+}
+
+/* Footer */
+.new-comment-footer {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  margin-top: 0.5rem !important;
+}
+
+/* Markdown Info */
+.markdown-info {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.375rem !important;
+  color: rgba(255, 255, 255, 0.5) !important;
+  font-size: 0.75rem !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+}
+
+.markdown-info:hover {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.markdown-info .octicon {
+  width: 14px !important;
+  height: 14px !important;
+  fill: currentColor !important;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding: 0.625rem 1.25rem !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 0.5rem !important;
+  color: #fff !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.btn:active {
+  transform: translateY(0) !important;
+}
+
+.btn-primary {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.btn-primary:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.btn:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+.btn:disabled:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn .octicon {
+  width: 16px !important;
+  height: 16px !important;
+  fill: currentColor !important;
+}
+
+/* Links */
+.text-link {
+  color: #fff !important;
+  transition: color 0.2s ease !important;
+}
+
+.text-link:hover {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Utilities */
+.v-align-bottom {
+  vertical-align: bottom !important;
+}
+
+/* Loading State */
+.timeline-comment.is-loading {
+  opacity: 0.6 !important;
+}

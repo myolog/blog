@@ -1,27 +1,31 @@
 ---
-import { render } from "astro:content"
-import { Main } from '@myolog/layouts';
-import { MyoSEO } from '@myolog/libs/astro';
-import { PostDetail } from "@myolog/components/post"
+import { render } from "astro:content";
+import { Main } from "@myolog/layouts";
+import { MyoSEO } from "@myolog/libs/astro";
+import { PostDetail } from "@myolog/components/post";
 import { Breadcrumb } from "@myolog/components/breadcrumb";
 import { MyoStaticPaths } from "@myolog/libs/astro";
 
+import "../../../../styles/callout.css"
+import "../../../../styles/utterance.css"
+
 export async function getStaticPaths() {
-	return await MyoStaticPaths.slugStaticPath()
+	return await MyoStaticPaths.slugStaticPath();
 }
 
-
-
-const { title, heroImage } = Astro.props.data
+const { title, heroImage } = Astro.props.data;
 
 const { Content } = await render(Astro.props);
-
-
 ---
 
 <Main seo={MyoSEO.BlogSEO(Astro.props.data)}>
-	<Breadcrumb title={title}/>
-	<PostDetail {...Astro.props.data} category={Astro.props.data.tags[0]}>
-		<Content/>
-	</PostDetail> 
+	<Breadcrumb title={title} />
+	<PostDetail
+		{...Astro.props.data}
+		category={Astro.props.data.tags[0]}
+		headings={Astro.props.rendered?.metadata?.headings!}
+	>
+		<Content />
+	</PostDetail>
+
 </Main>

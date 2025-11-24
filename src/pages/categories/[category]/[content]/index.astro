@@ -7,6 +7,10 @@ import { MyoSEO, MyoStaticPaths } from "@myolog/libs/astro";
 import { MyoUrl } from "@myolog/libs";
 import { Post, PostView } from "@myolog/components/post";
 import { Badge } from "@myolog/components/common";
+import { ContentData } from "@myolog/markdown/data";
+import { Icon } from "astro-icon/components";
+import type { Icon as IconType } from "virtual:astro-icon";
+
 
 export function getStaticPaths() {
     return MyoStaticPaths.contentStaticPath()
@@ -14,12 +18,38 @@ export function getStaticPaths() {
 
 const { category, content } = Astro.params
 const posts = await getCollection(`categories/${category}/${content}` as CollectionKey)
+const data = ContentData[content]
+
 ---
 
 <Main seo={{title: `묘로그 - ${content}`}}>
     <Breadcrumb/>
-    <div class="my-4">
-        <Badge title="Astro"/>
+    <div class="mb-12 mt-8">
+        <div class="flex items-center gap-4 mb-4">
+        <div id="category-icon" class:list={["p-4 backdrop-blur-xl rounded-2xl border",
+                "dark:bg-white/90 text-black border-white/30",
+                "bg-black/90 text-white border-black/30"]}>
+            <Icon name={data.icon as IconType} class="w-8 h-8 dark:text-black"/>
+        </div>
+        <div>
+            <h1 id="category-title" class:list={["mb-2 text-2xl", "dark:text-white", "text-black"]}>
+                {data.title}
+            </h1>
+            <p id="category-description" class:list={["text-base","dark:text-white/70", "text-black"]}>
+                {data.description}
+            </p>
+        </div>
+
+        </div>
+        <div class="header-article-count-container" class:list={["inline-flex items-center gap-2 px-4 py-2 rounded-lg backdrop-blur-xl border",
+                "dark:bg-white/10 border-white/20",
+                "bg-black/10 border-black/20"
+            ]}>
+            <Icon name="lucide:book-open" class:list={["w-h h-4", "dark:text-white/80 text-black/80"]}/>
+            <span class:list={["text-sm", "dark:text-white/80", "text-black/80"]}>
+            {posts.length} articles
+        </span>
+    </div>
     </div>
     <PostView>
         {posts.map((x) => <Post {...x.data} href={`/categories/${category}/${content}/${x.id}`} category={x.data.tags[0]}/>)}

@@ -5,10 +5,11 @@ import { Main } from '@myolog/layouts';
 import { MyoCollection, MyoStaticPaths } from "@myolog/libs/astro"
 import { Badge } from '@myolog/components/common';
 import { getCollection } from 'astro:content';
-import { render } from 'astro:content';
 import { Post, PostView } from '@myolog/components/post';
 import type { CollectionKey } from 'astro:content';
 import { Icon } from 'astro-icon/components';
+import { type Icon as IconType  } from 'virtual:astro-icon';
+import { ContentData } from '@myolog/markdown/data';
 
 export function getStaticPaths() {
     return MyoStaticPaths.categoryStaticPath()
@@ -23,11 +24,12 @@ const contents = MyoCollection.categories[category].contents
 type Post = Awaited<ReturnType<typeof getCollection>>[number]
 
 const postsByContent: Record<string, Post[]> = {}
-
+const contentPerArticleCount: Record<string,number> = {}
 
 await Promise.all(
   contents.map(async (contentName) => {
     const allPosts = await getCollection(`categories/${category}/${contentName}` as CollectionKey)
+    contentPerArticleCount[contentName] = allPosts.length
     postsByContent[contentName] = allPosts.sort((a,b) => b.data.publishTime - a.data.publishTime).slice(0,3)
   })
 )
@@ -39,9 +41,13 @@ await Promise.all(
     <CategoryHeader title={category} description={description!} icon={icon!} articleLength={articleCount} />
     {Object.keys(postsByContent).map(x => <div>
         <div class="flex gap-2 flex-row items-center mb-4">
-            <Badge title={x} size="small"/>
+            <div class="flex flex-row gap-1 items-center">
+              <Icon name={ContentData[x].icon as IconType} class='w-8 h-8'/>
+              <span class="text-xl text-black dark:text-white">{ContentData[x].title}</span>
+              <span class="text-sm text-black/80 dark:text-white/70">{contentPerArticleCount[x]} articles</span>
+            </div>
             <hr class="flex-1">
-            <a href={`/categories/${category}/${x}`} class="flex gap-2 flex-row">
+            <a href={`/categories/${category}/${x}`} class="see-more flex gap-0.5 flex-row text-black/70 hover:text-black dark:text-white/70 hover:dark:text-white">
               See more
               <Icon name="lucide:arrow-right" class="self-center"/>
             </a>
@@ -51,3 +57,19 @@ await Promise.all(
         </PostView>
     </div>)}
 </Main>
+
+<script>
+  import { inView, animate, hover } from "motion";
+
+  document.querySelectorAll(".see-more").forEach((node) => {
+    const icon = node.querySelector("svg")!
+    inView(icon, (el) => {
+      animate(el, { x: [0, 5, 0] }, { duration: 1.5, repeat: Infinity });
+    })
+
+    hover(node, (el) => { 
+      animate(el, { scale: 1.05 })
+      return () => animate(el, { scale: 1.0 })
+    });
+  })
+</script>

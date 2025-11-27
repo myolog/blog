@@ -20,66 +20,46 @@ import remarkEmoji from "remark-emoji"
 //rehype
 import rehypeMermaid from 'rehype-mermaid';
 import tailwindcss from "@tailwindcss/vite";
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-///@ts-ignore
-const resolveFromBlog = (p) => path.resolve(__dirname, p);
 
 export default defineConfig({
-    site: 'https://blog.myogoo.me',
-    integrations: [mdx(), sitemap(), robotsTxt(), pageInsight(), pagefind(), minify(), icon()],
-    adapter: cloudflare({
-        platformProxy: {
-            enabled: true
-        }
-    }),
+	site: "https://blog.myogoo.me",
+	integrations: [
+		mdx(),
+		sitemap(),
+		robotsTxt(),
+		pageInsight(),
+		pagefind(),
+		minify(),
+		icon(),
+	],
+	adapter: cloudflare({
+		platformProxy: {
+			enabled: true,
+		},
+	}),
 
-    vite: {
-        plugins: [tailwindcss()],
-        ssr: {
-            noExternal: ["@myolog/components", "@myolog/layouts", "@myolog/libs"],
-        },
-        server: {
-            fs: {
-                allow: [
-                    resolveFromBlog('..'),
-                    resolveFromBlog('../components'),
-                    resolveFromBlog('../layouts'),
-                    resolveFromBlog('../markdown'),
-                    resolveFromBlog('../libs')
-                ]
-            }
-        },
-        // node_modules 링크 대신 실제 소스 경로를 보도록 alias
-        resolve: {
-            alias: {
-                '@myolog/components': resolveFromBlog('../components'),
-                '@myolog/layouts': resolveFromBlog('../layouts'),
-                '@myolog/markdown': resolveFromBlog('../markdown'),
-                '@myolog/libs': resolveFromBlog('../libs'),
-            }
-        }
-    },
+	vite: {
+		plugins: [tailwindcss()],
+	
+		optimizeDeps: {
+			exclude: ["motion"],
+		},
+	},
 
-    markdown: {
-        remarkPlugins: [
-            remarkPrase,
-            remarkDirective,
-            remarkCallout,
-            remarkMermaid,
-            remarkEmoji
-        ],
-        remarkRehype: {
-            allowDangerousHtml: true,
-        },
-        syntaxHighlight: {
-            excludeLangs: ['mermaid', 'math'],
-        },
-        rehypePlugins: [
-            [rehypeMermaid, {strategy: 'img-svg'}]
-        ]
-    }
+	markdown: {
+		remarkPlugins: [
+			remarkPrase,
+			remarkDirective,
+			remarkCallout,
+			remarkMermaid,
+			remarkEmoji,
+		],
+		remarkRehype: {
+			allowDangerousHtml: true,
+		},
+		syntaxHighlight: {
+			excludeLangs: ["mermaid", "math"],
+		},
+		rehypePlugins: [[rehypeMermaid, { strategy: "img-svg" }]],
+	},
 });

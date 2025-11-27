@@ -2,17 +2,16 @@
 import { Breadcrumb } from '@myolog/components/breadcrumb';
 import { CategoryHeader } from '@myolog/components/category';
 import { Main } from '@myolog/layouts';
-import { MyoCollection, MyoStaticPaths } from "@myolog/libs/astro"
-import { Badge } from '@myolog/components/common';
+import { MyoCollection } from "@myolog/libs/server"
 import { getCollection } from 'astro:content';
 import { Post, PostView } from '@myolog/components/post';
 import type { CollectionKey } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import { type Icon as IconType  } from 'virtual:astro-icon';
 import { ContentData } from '@myolog/markdown/data';
-
-export function getStaticPaths() {
-    return MyoStaticPaths.categoryStaticPath()
+import { MyoStaticPath } from '@myolog/libs/server';
+export async function getStaticPaths() {
+  return MyoStaticPath.categoryStaticPath()
 }
 
 

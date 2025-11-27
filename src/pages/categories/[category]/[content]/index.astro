@@ -3,18 +3,14 @@ import { getCollection, type CollectionKey } from "astro:content";
 
 import { Breadcrumb } from "@myolog/components/breadcrumb";
 import { Main } from "@myolog/layouts";
-import { MyoSEO, MyoStaticPaths } from "@myolog/libs/astro";
-import { MyoUrl } from "@myolog/libs";
 import { Post, PostView } from "@myolog/components/post";
-import { Badge } from "@myolog/components/common";
 import { ContentData } from "@myolog/markdown/data";
 import { Icon } from "astro-icon/components";
 import type { Icon as IconType } from "virtual:astro-icon";
+import { MyoStaticPath } from '@myolog/libs/server';
 
-
-export function getStaticPaths() {
-    return MyoStaticPaths.contentStaticPath()
-}
+export async function getStaticPaths() {
+    return MyoStaticPath.contentStaticPath();}
 
 const { category, content } = Astro.params
 const posts = await getCollection(`categories/${category}/${content}` as CollectionKey)

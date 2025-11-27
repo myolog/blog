@@ -13,12 +13,16 @@
 		"find": "pagefind --site \"dist\""
 	},
 	"dependencies": {
-		"@astrojs/cloudflare": "^12.2.3",
+		"@astrojs/cloudflare": "^12.6.12",
 		"@astrojs/mdx": "^4.1.0",
 		"@astrojs/rss": "^4.0.11",
 		"@astrojs/sitemap": "^3.2.1",
 		"@microflash/remark-callout-directives": "^4.3.3",
-		"astro": "^5.5.0",
+		"@myolog/components": "^0.0.1",
+		"@myolog/layouts": "^0.0.1",
+		"@myolog/libs": "^0.0.1",
+		"@myolog/markdown": "^0.0.1",
+		"@tailwindcss/vite": "^4.1.15",
 		"astro-icon": "^1.1.5",
 		"astro-minify-html-swc": "^0.1.5",
 		"astro-page-insight": "^0.10.1",
@@ -26,17 +30,20 @@
 		"astro-robots-txt": "^1.0.0",
 		"astro-seo": "^0.8.4",
 		"mermaid": "^11.4.1",
+		"motion": "^12.23.24",
 		"playwright": "^1.52.0",
 		"rehype-mermaid": "^3.0.0",
 		"remark-directive": "^4.0.0",
 		"remark-emoji": "^5.0.1",
-		"remark-parse": "^11.0.0"
+		"remark-parse": "^11.0.0",
+        "tailwindcss": "^4.1.15",
+        "class-variance-authority": "^0.7.1",
+		"astro": "^5.16.1"
+
 	},
 	"devDependencies": {
-		"@cloudflare/workers-types": "^4.20250204.0",
 		"@iconify-json/carbon": "^1.2.14",
 		"@iconify-json/logos": "^1.2.10",
-		"@iconify-json/lucide": "^1.2.71",
-		"wrangler": "^3.109.0"
+		"@iconify-json/lucide": "^1.2.71"
 	}
 }

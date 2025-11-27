@@ -6,7 +6,9 @@ import { Post } from "@myolog/components/post";
 import { CollectionData } from "@myolog/markdown/data";
 import { MyoMath }  from "@myolog/libs"
 const collectionKey = MyoMath.pickRandom(CollectionData.values)?.name as CollectionKey
-const collections = await getCollection(collectionKey);
+const collections = (await getCollection(collectionKey)).slice(0,5);
+
+export const prerender = false;
 ---
 
 <Main seo={{ title: "묘로그" }}>
